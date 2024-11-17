@@ -11,7 +11,7 @@ with DAG(
     schedule="0 0 * * *", # 매일 0시 0분에 실행
 
     # dag이 언제 돌 것인가
-    start_date=pendulum.datetime(2021, 1, 1, tz="Asia/Seoul"),
+    start_date=pendulum.datetime(2024, 11, 18, tz="Asia/Seoul"),
 
     # 1/1 부터 현재 시간까지 누락된 데이터를 모두 수집
     catchup=False,   # False로 해놓는것이 좋다.
