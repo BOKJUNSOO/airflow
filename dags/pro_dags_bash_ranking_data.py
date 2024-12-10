@@ -11,6 +11,11 @@ with DAG(
     catchup = False
 ) as dag:
     
+    headers = {
+            'x-nxopen-api-key':'{{var.value.apikey_openapi_nexon}}',
+            "User-agent" : "Mozilla/5.0"
+    }
+
     start_sign = BashOperator(
         task_id = "start_sign",
         bash_command="echo start download"
@@ -21,9 +26,7 @@ with DAG(
         http_conn_id = "openapi.nexon",
         endpoint = "https://open.api.nexon.com/maplestory/v1/ranking/overall?date=2024-12-10&world_name=%EC%97%98%EB%A6%AC%EC%8B%9C%EC%9B%80&page=1",
         method = "GET",
-        headers = {
-            'x-nxopen-api-key':'{{var.value.apikey_openapi_nexon}}'
-        }
+        headers = headers
     )
 
     start_sign >> ranking_data

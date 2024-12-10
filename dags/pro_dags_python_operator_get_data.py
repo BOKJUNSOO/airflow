@@ -14,7 +14,7 @@ KEY = os.getenv("NEXON_API_KEY")
 
 # DAG
 with DAG(
-    dag_id = "dags_python_operator_get_data",
+    dag_id = "pro_dags_python_operator_get_data",
     schedule = "0 0 * * *",
     start_date= pendulum.datetime(2024, 12, 11 , tz = "Asia/Seoul"),
     catchup=False
