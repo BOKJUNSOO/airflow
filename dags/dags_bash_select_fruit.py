@@ -12,12 +12,12 @@ with DAG(
     
     t1_apple = BashOperator(
         task_id = "t1_apple",
-        bash_command="/opt/airflow/plugins/select_fruit.sh APPLE" # wsl의 airflow와 컨테이너 plugins 맵핑되어 있기 때문에 가능
+        bash_command="/opt/airflow/plugins/shell/select_fruit.sh APPLE" # wsl의 airflow와 컨테이너 plugins 맵핑되어 있기 때문에 가능
     )
 
     t2_orange = BashOperator(
         task_id = "t2_orange",
-        bash_command = "/opt/airflow/plugins/select_fruit.sh ORANGE"
+        bash_command = "/opt/airflow/plugins/shell/select_fruit.sh ORANGE"
     )
 
     t1_apple >> t2_orange
