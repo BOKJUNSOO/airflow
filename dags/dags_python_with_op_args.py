@@ -12,6 +12,7 @@ with DAG(
     catchup= False,
 ) as dag:
 
+# op_args parameter 이해
     regist_t1 = PythonOperator(
         task_id = "regist_t1",
         python_callable= regis,
