@@ -26,7 +26,7 @@ with DAG(
     @task(task_id = "python_2")
     def python_2(**kwargs):
         ti = kwargs["ti"]
-        rslt = ti.xcom_pull(task_id = "s_dot_env")
+        rslt = ti.xcom_pull(task_ids = "s_dot_env")
         import json
         from pprint import pprint
         pprint(json.loads(rslt))
