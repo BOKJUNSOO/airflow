@@ -2,6 +2,7 @@ from airflow import DAG
 import datetime
 import pendulum
 from airflow.operators.bash import BashOperator
+from airflow.providers.http.operators.http import SimpleHttpOperator
 
 with DAG(
     dag_id = "dags_bash_ranking_data",
@@ -15,9 +16,18 @@ with DAG(
         bash_command="echo start download"
     )
 
-    download_task = BashOperator(
-        task_id = "download_task",
-        bash_command="/opt/airflow/plugins/shell/download_data.sh {{var.value.apikey_openapi_nexon}}"
+    ranking_data = SimpleHttpOperator(
+        task_id = "ranking_data",
+        http_conn_id = "openapi.nexon",
+        # 전역변수 variable
+        endpoint = "{{var.value.apikey_openapi_nexon}}/maplestory/v1/ranking/overall?date=2024-12-10&page=1",
+        method = "GET",
+        headers = {
+            'Content-Type':'application/json',
+            'charset':'utf-8',
+            'Accept': '*/*'
+        }
     )
 
-    start_sign >> download_task
+
+    start_sign >> ranking_data
