@@ -10,9 +10,14 @@ with DAG(
     catchup = False
 ) as dag:
     
+    start_sign = BashOperator(
+        task_id = "start_sign",
+        bash_command="echo start download"
+    )
+
     download_task = BashOperator(
         task_id = "download_task",
         bash_command="/opt/airflow/plugins/shell/download_data.sh {{var.value.apikey_openapi_nexon}}"
     )
 
-    download_task
+    start_sign >> download_task
