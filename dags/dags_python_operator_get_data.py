@@ -15,7 +15,7 @@ with DAG(
     def get_data():
         target_date = datetime.now().strftime("%Y-%m-%d")
 
-        file_path = f"./data/ranking_{target_date}.json"
+        #file_path = f"./data/ranking_{target_date}.json"
     
         headers = {
             "x-nxopen-api-key" : "{{var.value.apikey_openapi_nexon}}",
@@ -37,12 +37,13 @@ with DAG(
                 data = req.json()
                 mydata.append(data)
     
-        with open(file_path, "w", encoding= "UTF-8-SIG") as f:
-            json.dump(mydata
-                      ,f
-                      ,ensure_ascii=False
-                    ,indent='\t'
-                    )
+        #with open(file_path, "w", encoding= "UTF-8-SIG") as f:
+        #   json.dump(mydata
+        #              ,f
+        #              ,ensure_ascii=False
+        #            ,indent='\t'
+        #            )
+            print(mydata)
         return print("done the get ranking job!")
     
     get_data_ = PythonOperator(
