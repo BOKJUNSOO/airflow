@@ -26,7 +26,7 @@ with DAG(
         #file_path = f"./data/ranking_{target_date}.json"
     
         headers = {
-            "x-nxopen-api-key" : f"{KEY}",
+            "x-nxopen-api-key" : "my_api_key",
             "User-agent" : "Mozilla/5.0"
             }
 
