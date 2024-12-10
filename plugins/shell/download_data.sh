@@ -1,3 +1,4 @@
+#!/bin/bash
 api_key=$@
 
 curl -X 'GET' \
