@@ -1,6 +1,7 @@
 venv/
 logs/
 *.env/
+.env
 data/
 __pycache__/
 test.ipynb
