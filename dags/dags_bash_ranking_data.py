@@ -14,3 +14,5 @@ with DAG(
         task_id = "download_task",
         bash_command=f"opt/airflow/plugins/shell/download.sh {{var.value.apikey_openapi_nexon}}"
     )
+
+    download_task
