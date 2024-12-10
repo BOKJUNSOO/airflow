@@ -12,7 +12,7 @@ with DAG(
     
     download_task = BashOperator(
         task_id = "download_task",
-        bash_command="opt/airflow/plugins/download_data.sh {{var.value.apikey_openapi_nexon}}"
+        bash_command="/opt/airflow/plugins/download_data.sh {{var.value.apikey_openapi_nexon}}"
     )
 
     download_task
