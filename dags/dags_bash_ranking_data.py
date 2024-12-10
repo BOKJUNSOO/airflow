@@ -19,15 +19,11 @@ with DAG(
     ranking_data = SimpleHttpOperator(
         task_id = "ranking_data",
         http_conn_id = "openapi.nexon",
-        # 전역변수 variable
-        endpoint = "{{var.value.apikey_openapi_nexon}}/maplestory/v1/ranking/overall?date=2024-12-10&page=1",
+        endpoint = "https://open.api.nexon.com/maplestory/v1/ranking/overall?date=2024-12-10&world_name=%EC%97%98%EB%A6%AC%EC%8B%9C%EC%9B%80&page=1",
         method = "GET",
         headers = {
-            'Content-Type':'application/json',
-            'charset':'utf-8',
-            'Accept': '*/*'
+            'x-nxopen-api-key':'{{var.value.apikey_openapi_nexon}}'
         }
     )
-
 
     start_sign >> ranking_data
