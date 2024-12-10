@@ -5,20 +5,28 @@ import requests
 import json
 import time
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+# SET A KEY
+load_dotenv()
+KEY = os.getenv("NEXON_API_KEY")
+
+# DAG
 with DAG(
     dag_id = "dags_python_operator_get_data",
     schedule = "0 0 * * *",
     start_date= pendulum.datetime(2024, 12, 11 , tz = "Asia/Seoul"),
     catchup=False
 ) as dag:
-    # PARAMS
+    # GET DATA FUNCTION
     def get_data():
         target_date = datetime.now().strftime("%Y-%m-%d")
 
         #file_path = f"./data/ranking_{target_date}.json"
     
         headers = {
-            "x-nxopen-api-key" : "{{var.value.apikey_openapi_nexon}}",
+            "x-nxopen-api-key" : f"{KEY}",
             "User-agent" : "Mozilla/5.0"
             }
 
@@ -48,7 +56,7 @@ with DAG(
     
     get_data_ = PythonOperator(
         task_id = "get_data_",
-        python_callable= get_data   
+        python_callable= get_data
     )
 
     get_data_
