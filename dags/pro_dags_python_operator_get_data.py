@@ -1,16 +1,15 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.models import Variable
+
 import pendulum
 import requests
 import json
 import time
 from datetime import datetime
-from dotenv import load_dotenv
-import os
 
 # SET A KEY
-load_dotenv()
-KEY = os.getenv("NEXON_API_KEY")
+api_key = Variable.get("apikey_openapi_nexon")
 
 # DAG
 with DAG(
@@ -26,7 +25,7 @@ with DAG(
         #file_path = f"./data/ranking_{target_date}.json"
     
         headers = {
-            "x-nxopen-api-key" : "my_api_key",
+            "x-nxopen-api-key" : f"{api_key}",
             "User-agent" : "Mozilla/5.0"
             }
 
