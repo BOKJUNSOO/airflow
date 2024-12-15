@@ -13,6 +13,7 @@ with DAG(
     @task(task_id="python_task")
     def show_templates(**kwargs):
         from pprint import pprint
+        # kwargs 에 parameter을 주지 않고, 담고있는 정보를 확인
         pprint(kwargs)
     
     show_templates()
