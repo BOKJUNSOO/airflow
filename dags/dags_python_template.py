@@ -14,6 +14,7 @@ with DAG(
     def python_fuction1(start_date, end_date, **kwargs):
         print(start_date)
         print(end_date)
+        print("datetime.now():", datetime.now())
     
     python_t1 = PythonOperator(
         task_id = "python_t1",
