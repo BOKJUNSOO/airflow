@@ -39,4 +39,4 @@ with DAG(
         python_callable=print_datetime
     )
 
-    bash_t1>>bash_t2
+    python_t1>>bash_t1>>bash_t2
