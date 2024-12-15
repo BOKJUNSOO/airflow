@@ -1,10 +1,12 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import datetime
 import pendulum
 
 target_date = datetime.now().strftime("%Y-%m-%d")
-print("date_time_formating with datetime module :",target_date)
+def print_datetime():
+    print("date_time_formating with datetime module :",target_date)
 
 with DAG(
     dag_id = "dags_bash_operator_with_template",
@@ -30,6 +32,11 @@ with DAG(
         # 앞에커맨드가 성공하면 && 뒤에 커맨드 실행 (bash 문법)
         bash_command='echo "Start date is $START_DATE" &&'
                      'echo "End date is $END_DATE"'
+    )
+
+    python_t1 = PythonOperator(
+        task_id = "python_t1",
+        python_callable=print_datetime
     )
 
     bash_t1>>bash_t2
