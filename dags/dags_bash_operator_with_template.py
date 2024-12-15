@@ -3,6 +3,9 @@ from airflow.operators.bash import BashOperator
 from datetime import datetime
 import pendulum
 
+target_date = datetime.now().strftime("%Y-%m-%d")
+print("date_time_formating with datetime module :",target_date)
+
 with DAG(
     dag_id = "dags_bash_operator_with_template",
     start_date = pendulum.datetime(2024,12,1 , tz = "Asia/Seoul"),
