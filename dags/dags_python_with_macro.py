@@ -29,7 +29,10 @@ with DAG(
     # airflow template 를 사용하지 않고 python 문법 사용
     @task(task_id="task_direct_calc")
     def get_direct_calc(**kwargs):
+        # 스케쥴러 부하 경감
         from dateutil.relativedelta import relativedelta
+        # 스케쥴러는 주기적으로 DAG 문법을 parsing 하여 확인하는데 ,
+        # import task or operator 안은 확인하지 않는다.
         data_interval_end = kwargs['data_interval_end']
 
         # 직접연산
@@ -40,4 +43,5 @@ with DAG(
         print(prev_month_date_first.strftime("%Y-%m-%d"))
         print(prev_month_day_last.strftime("%Y-%m-%d"))
 
+    # task flow
     get_date_time_macro() >> get_direct_calc()
